@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map For FileConfig
+#######################################
+
+#######################################
+# Class (KEYWORD1)
+#######################################
+
+FileConfig	KEYWORD1
+~FileConfig	KEYWORD1
+FileConfigHelper	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+rewind	KEYWORD2
+findHeader	KEYWORD2
+findKey	KEYWORD2
+getValue	KEYWORD2
+getLastLine	KEYWORD2
+clearLastLine	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
