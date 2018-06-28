@@ -73,11 +73,6 @@ String FileConfig::readNextLine() {
     symbol = readNextSkip();
   }
 
-    Serial.print(counter++);
-    Serial.print('-');
-    Serial.println(getFreeSram());
-    delay(25);
-
   return linebuffer;
 }
 

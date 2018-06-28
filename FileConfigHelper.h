@@ -2,7 +2,7 @@
 #define _FILECONFIGHELPER_H_
 
 #include <Arduino.h>
-#include <RTClib.h>
+#include <TimeLib.h>
 
 bool toBool(const String& value) {
   return value.equalsIgnoreCase(F("true")) ? true : false;
@@ -13,19 +13,19 @@ String fromBool(const bool& value) {
 }
 
 unsigned long toSeconds(const String& value) {
-  byte hour {0}, minute {0}, second {0};
+  byte newHour {0}, newMinute {0}, newSecond {0};
   int i = value.indexOf(':');
   if (i != -1) {
     // Duration in HH:MM format
-    hour = value.substring(0).toInt();
-    minute = value.substring(i+1).toInt();
+    newHour = value.substring(0).toInt();
+    newMinute = value.substring(i+1).toInt();
     
     int j = value.indexOf(':', i+1);
     if (j != -1) {
      // Duration in HH:MM:SS format
-     second = value.substring(j+1).toInt();
+     newSecond = value.substring(j+1).toInt();
     }
-    return TimeSpan(0, hour, minute, second).totalseconds();
+    return newHour * SECS_PER_HOUR + newMinute * SECS_PER_MIN + newSecond;
   }
   else {
     // Duration in SSSS format
@@ -34,26 +34,25 @@ unsigned long toSeconds(const String& value) {
 }
 
 String fromSeconds(const unsigned long& value) {
-  TimeSpan span(value);
   String timeString("");
-  if (span.days() != 0) {
-    timeString = String(span.days());
+  if (day(value) != 0) {
+    timeString = String(day(value));
     timeString += String(F(" days, "));
   }
   
-  if (span.hours() < 10)
+  if (hour(value) < 10)
     timeString += '0';
-  timeString += span.hours();
+  timeString += hour(value);
   timeString += ':';
   
-  if (span.minutes() < 10)
+  if (minute(value) < 10)
     timeString += '0';
-  timeString += span.minutes();
+  timeString += minute(value);
   timeString += ':';
   
-  if (span.seconds() < 10)
+  if (second(value) < 10)
     timeString += '0';
-  timeString += span.seconds();
+  timeString += second(value);
   
   return timeString;
 }
