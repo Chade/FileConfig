@@ -4,12 +4,13 @@
 #include <Arduino.h>
 #include <TimeLib.h>
 
-bool toBool(const String& value) {
-  return value.equalsIgnoreCase(F("true")) ? true : false;
+bool toBool(String value) {
+  value.trim();
+  return value.equalsIgnoreCase(F("true"));
 }
 
 String fromBool(const bool& value) {
-  return value == true ? F("true") : F("false");
+  return (value == true) ? F("true") : F("false");
 }
 
 time_t toTime(const String& value) {
