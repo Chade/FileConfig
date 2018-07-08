@@ -20,6 +20,7 @@ class FileConfig : public SDLib::File
     bool   findKey(const String& key, const bool& fromBeginning = true);
     
     String getValue(const String& key, const String& header = String());
+	String getValue(const String& key, const String& header, void (* functionPointer)());
     
     String getLastLine();
     void   clearLastLine();
@@ -38,7 +39,6 @@ class FileConfig : public SDLib::File
     
   private:
     String lastLine;
-    unsigned int counter;
 };
 
 #endif // _FILECONFIG_H_

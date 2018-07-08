@@ -147,7 +147,6 @@ bool FileConfig::findKey(const String& key, const bool& fromBeginning) {
 String FileConfig::getValue(const String& key, const String& header) {
   // Search from beginning
   rewind();
-  counter = 0;
   
   // Search for header, if given
   if (header.length() > 0) {
@@ -165,6 +164,32 @@ String FileConfig::getValue(const String& key, const String& header) {
     }
   }
   
+  return String();
+}
+
+String FileConfig::getValue(const String& key, const String& header, void (* functionPointer)()) {
+  // Search from beginning
+  rewind();
+
+  // Search for header, if given
+  if (header.length() > 0) {
+    // Find right section
+    if (!findHeader(header, false)) {
+      return String();
+    }
+  }
+
+  // Search key value pair
+  String candKey, candValue;
+  while(readNextKeyValue(candKey, candValue)) {
+	// Call a function during execution
+    functionPointer();
+	
+    if (key.equalsIgnoreCase(candKey)) {
+      return candValue;
+    }
+  }
+
   return String();
 }
 
