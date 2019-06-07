@@ -20,12 +20,20 @@ class FileConfig : public SDLib::File
     bool   findKey(const String& key, const bool& fromBeginning = true);
     
     String getValue(const String& key, const String& header = String());
-	String getValue(const String& key, const String& header, void (* functionPointer)());
+    String getValue(const String& key, const String& header, void (* functionPointer)());
     
     String getLastLine();
     void   clearLastLine();
-    
-    uint16_t getFreeSram();
+  
+    static uint16_t getFreeSram() {
+      uint8_t newVariable;
+      // Heap is empty, use bss as start memory address
+      if ((uint16_t)__brkval == 0)
+        return (((uint16_t)&newVariable) - ((uint16_t)&__bss_end));
+      // Use heap end as the start of the memory address
+      else
+        return (((uint16_t)&newVariable) - ((uint16_t)__brkval));
+    }
   
   protected:
     bool   isHeader(const String& line);
