@@ -14,12 +14,23 @@ FileConfigHelper	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
+signed_time_t	KEYWORD2
 rewind	KEYWORD2
 findHeader	KEYWORD2
 findKey	KEYWORD2
 getValue	KEYWORD2
 getLastLine	KEYWORD2
 clearLastLine	KEYWORD2
+toBool	KEYWORD2
+fromBool	KEYWORD2
+toTime	KEYWORD2
+toSignedTime	KEYWORD2
+fromTime	KEYWORD2
+fromSignedTime	KEYWORD2
+toSeconds	KEYWORD2
+toSignedSeconds	KEYWORD2
+fromSeconds	KEYWORD2
+fromSignedSeconds	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
